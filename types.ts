@@ -43,4 +43,4 @@ export interface AppState {
   theme: 'light' | 'dark';
 }
 
-export type View = 'landing' | 'login' | 'book_selector' | 'dashboard' | 'chat' | 'timeline' | 'reports' | 'insights' | 'settings';
+export type View = 'landing' | 'login' | 'book_selector' | 'dashboard' | 'chat' | 'timeline' | 'reports' | 'insights' | 'settings' | 'manual_entry';

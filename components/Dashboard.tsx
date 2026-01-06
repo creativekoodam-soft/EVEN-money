@@ -10,9 +10,10 @@ interface DashboardProps {
   insights: Insight[];
   currency: string;
   onQuickAdd: () => void;
+  onManualAdd: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ transactions, insights, currency, onQuickAdd }) => {
+const Dashboard: React.FC<DashboardProps> = ({ transactions, insights, currency, onQuickAdd, onManualAdd }) => {
   const bubbleRef = useRef<SVGSVGElement>(null);
 
   const stats = useMemo(() => {
@@ -108,15 +109,23 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, insights, currency,
               </span>
             </div>
           </div>
-          <button 
-            onClick={onQuickAdd}
-            className="bg-indigo-600/20 hover:bg-indigo-600/40 text-indigo-300 px-4 py-2 rounded-2xl text-xs font-bold flex items-center gap-2 transition-all border border-indigo-500/20"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-            Quick Add
-          </button>
+          <div className="flex flex-col gap-2">
+            <button 
+              onClick={onQuickAdd}
+              className="bg-indigo-600/20 hover:bg-indigo-600/40 text-indigo-300 px-4 py-2 rounded-2xl text-xs font-bold flex items-center gap-2 transition-all border border-indigo-500/20"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              Quick Add
+            </button>
+            <button 
+              onClick={onManualAdd}
+              className="glass hover:bg-white/5 text-zinc-400 px-4 py-2 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all border border-white/5"
+            >
+              Manual Entry
+            </button>
+          </div>
         </div>
         
         <div className="mt-2">

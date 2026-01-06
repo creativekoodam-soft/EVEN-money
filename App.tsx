@@ -12,6 +12,7 @@ import Settings from './components/Settings';
 import BookSelector from './components/BookSelector';
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
+import ManualEntry from './components/ManualEntry';
 
 const App: React.FC = () => {
   const [state, setState] = useState<AppState>(database.getState());
@@ -77,9 +78,11 @@ const App: React.FC = () => {
 
     switch (view) {
       case 'dashboard':
-        return <Dashboard transactions={activeTransactions} insights={activeInsights} currency={state.currency} onQuickAdd={() => setView('chat')} />;
+        return <Dashboard transactions={activeTransactions} insights={activeInsights} currency={state.currency} onQuickAdd={() => setView('chat')} onManualAdd={() => setView('manual_entry')} />;
       case 'chat':
-        return <AIChat onComplete={refreshState} />;
+        return <AIChat onComplete={() => setView('dashboard')} />;
+      case 'manual_entry':
+        return <ManualEntry onComplete={() => setView('dashboard')} />;
       case 'timeline':
         return <TransactionTimeline transactions={activeTransactions} onDelete={refreshState} />;
       case 'reports':
@@ -96,7 +99,7 @@ const App: React.FC = () => {
       case 'settings':
         return <Settings state={state} onUpdate={refreshState} onExitBook={handleExitBook} onLogout={handleLogout} onGlobalReset={handleGlobalReset} />;
       default:
-        return <Dashboard transactions={activeTransactions} insights={activeInsights} currency={state.currency} onQuickAdd={() => setView('chat')} />;
+        return <Dashboard transactions={activeTransactions} insights={activeInsights} currency={state.currency} onQuickAdd={() => setView('chat')} onManualAdd={() => setView('manual_entry')} />;
     }
   };
 
@@ -152,7 +155,7 @@ const App: React.FC = () => {
       </main>
 
       {/* Bottom Floating AI Button */}
-      {isCoreView && view !== 'chat' && (
+      {isCoreView && view !== 'chat' && view !== 'manual_entry' && (
         <button 
           onClick={() => setView('chat')}
           className="fixed bottom-24 right-6 w-14 h-14 rounded-full bg-indigo-600 shadow-xl shadow-indigo-500/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-20 group"
