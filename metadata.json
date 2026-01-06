@@ -1,0 +1,7 @@
+{
+  "name": "EV.EN Money",
+  "description": "An AI-powered personal finance app that lets you talk to your money. Track expenses and income through natural chat and voice, visualize your wealth with interactive infographics, and get AI-driven insights.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
